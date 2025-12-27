@@ -1,0 +1,908 @@
+{\rtf1\ansi\ansicpg950\cocoartf2865
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset134 PingFangSC-Regular;\f2\fnil\fcharset0 AppleColorEmoji;
+\f3\fnil\fcharset136 PingFangTC-Regular;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww29200\viewh15860\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 ```html\
+<!DOCTYPE html>\
+<html lang="zh-TW">\
+<head>\
+\pard\tx720\tx805\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0     <meta charset="UTF-8">\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0     <meta name="viewport" content="width=device-width, initial-scale=1.0">\
+    <title>
+\f1 \'c4\'e3\'b5\'c4\'d8\'88\'df\'e4\'83\'c8\'d0\'c4\'ca\'c0\'bd\'e7
+\f0  - 
+\f1 \'9c\'d8\'dc\'b0\'d0\'c4\'c0\'ed\'9c\'79\'f2\'9e
+\f0 </title>\
+    \
+    <!-- Google Fonts -->\
+    <link rel="preconnect" href="https://fonts.googleapis.com">\
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@300;400;600&display=swap" rel="stylesheet">\
+    \
+    <style>\
+        * \{\
+            margin: 0;\
+            padding: 0;\
+            box-sizing: border-box;\
+        \}\
+\
+        body \{\
+            font-family: 'Noto Sans TC', sans-serif;\
+            background: linear-gradient(135deg, #ffeef8 0%, #e3f2fd 50%, #fff9e6 100%);\
+            min-height: 100vh;\
+            display: flex;\
+            justify-content: center;\
+            align-items: center;\
+            padding: 20px;\
+            overflow-x: hidden;\
+        \}\
+\
+        .container \{\
+            max-width: 600px;\
+            width: 100%;\
+            background: rgba(255, 255, 255, 0.85);\
+            backdrop-filter: blur(10px);\
+            border-radius: 30px;\
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);\
+            padding: 40px 30px;\
+            position: relative;\
+            overflow: hidden;\
+        \}\
+\
+        .container::before \{\
+            content: '';\
+            position: absolute;\
+            top: -50%;\
+            left: -50%;\
+            width: 200%;\
+            height: 200%;\
+            background: radial-gradient(circle, rgba(255, 182, 193, 0.1) 0%, transparent 70%);\
+            animation: float 20s ease-in-out infinite;\
+        \}\
+\
+        @keyframes float \{\
+            0%, 100% \{ transform: translate(0, 0) rotate(0deg); \}\
+            33% \{ transform: translate(30px, -30px) rotate(120deg); \}\
+            66% \{ transform: translate(-20px, 20px) rotate(240deg); \}\
+        \}\
+\
+        .page \{\
+            display: none;\
+            opacity: 0;\
+            animation: fadeIn 0.8s ease-in-out forwards;\
+            position: relative;\
+            z-index: 1;\
+        \}\
+\
+        .page.active \{\
+            display: block;\
+        \}\
+\
+        @keyframes fadeIn \{\
+            from \{\
+                opacity: 0;\
+                transform: translateY(20px);\
+            \}\
+            to \{\
+                opacity: 1;\
+                transform: translateY(0);\
+            \}\
+        \}\
+\
+        h1 \{\
+            font-family: 'Noto Serif TC', serif;\
+            font-size: 2rem;\
+            color: #ff6b9d;\
+            text-align: center;\
+            margin-bottom: 20px;\
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);\
+        \}\
+\
+        h2 \{\
+            font-size: 1.5rem;\
+            color: #ff8fab;\
+            text-align: center;\
+            margin-bottom: 25px;\
+        \}\
+\
+        .subtitle \{\
+            font-size: 0.95rem;\
+            color: #666;\
+            text-align: center;\
+            line-height: 1.8;\
+            margin-bottom: 30px;\
+            padding: 0 10px;\
+        \}\
+\
+        .input-group \{\
+            margin: 30px 0;\
+        \}\
+\
+        input[type="text"] \{\
+            width: 100%;\
+            padding: 15px 20px;\
+            border: 2px solid #ffc0cb;\
+            border-radius: 20px;\
+            font-size: 1rem;\
+            font-family: 'Noto Sans TC', sans-serif;\
+            transition: all 0.3s ease;\
+            background: rgba(255, 255, 255, 0.9);\
+        \}\
+\
+        input[type="text"]:focus \{\
+            outline: none;\
+            border-color: #ff6b9d;\
+            box-shadow: 0 0 15px rgba(255, 107, 157, 0.2);\
+        \}\
+\
+        .btn \{\
+            width: 100%;\
+            padding: 15px 30px;\
+            background: linear-gradient(135deg, #ff6b9d 0%, #ffa6c9 100%);\
+            color: white;\
+            border: none;\
+            border-radius: 25px;\
+            font-size: 1.1rem;\
+            font-weight: 500;\
+            cursor: pointer;\
+            transition: all 0.3s ease;\
+            box-shadow: 0 8px 20px rgba(255, 107, 157, 0.3);\
+            font-family: 'Noto Sans TC', sans-serif;\
+        \}\
+\
+        .btn:hover \{\
+            transform: translateY(-2px);\
+            box-shadow: 0 12px 30px rgba(255, 107, 157, 0.4);\
+        \}\
+\
+        .btn:active \{\
+            transform: translateY(0);\
+        \}\
+\
+        .story-text \{\
+            font-size: 1.05rem;\
+            line-height: 2;\
+            color: #555;\
+            text-align: center;\
+            padding: 20px;\
+            background: rgba(255, 255, 255, 0.6);\
+            border-radius: 20px;\
+            margin-bottom: 30px;\
+            font-family: 'Noto Serif TC', serif;\
+        \}\
+\
+        .progress-bar \{\
+            width: 100%;\
+            height: 8px;\
+            background: rgba(255, 192, 203, 0.3);\
+            border-radius: 10px;\
+            margin-bottom: 30px;\
+            overflow: hidden;\
+        \}\
+\
+        .progress-fill \{\
+            height: 100%;\
+            background: linear-gradient(90deg, #ff6b9d 0%, #ffa6c9 100%);\
+            border-radius: 10px;\
+            transition: width 0.5s ease;\
+        \}\
+\
+        .progress-text \{\
+            text-align: center;\
+            color: #ff6b9d;\
+            font-size: 0.9rem;\
+            margin-bottom: 15px;\
+            font-weight: 500;\
+        \}\
+\
+        .question-text \{\
+            font-size: 1rem;\
+            color: #888;\
+            text-align: center;\
+            margin-bottom: 15px;\
+            font-style: italic;\
+            line-height: 1.6;\
+        \}\
+\
+        .question-title \{\
+            font-size: 1.2rem;\
+            color: #333;\
+            text-align: center;\
+            margin-bottom: 25px;\
+            font-weight: 500;\
+            line-height: 1.8;\
+        \}\
+\
+        .options \{\
+            display: flex;\
+            flex-direction: column;\
+            gap: 15px;\
+        \}\
+\
+        .option \{\
+            padding: 18px 20px;\
+            background: rgba(255, 255, 255, 0.9);\
+            border: 2px solid #ffc0cb;\
+            border-radius: 20px;\
+            cursor: pointer;\
+            transition: all 0.3s ease;\
+            font-size: 1rem;\
+            text-align: left;\
+            line-height: 1.6;\
+        \}\
+\
+        .option:hover \{\
+            background: rgba(255, 182, 193, 0.2);\
+            border-color: #ff8fab;\
+            transform: translateX(5px);\
+        \}\
+\
+        .result-container \{\
+            text-align: center;\
+        \}\
+\
+        .result-title \{\
+            font-size: 1.8rem;\
+            color: #ff6b9d;\
+            margin-bottom: 20px;\
+            font-family: 'Noto Serif TC', serif;\
+        \}\
+\
+        .result-description \{\
+            font-size: 1.1rem;\
+            line-height: 2;\
+            color: #555;\
+            padding: 25px;\
+            background: rgba(255, 240, 245, 0.6);\
+            border-radius: 20px;\
+            margin-bottom: 30px;\
+        \}\
+\
+        .result-images \{\
+            display: grid;\
+            grid-template-columns: repeat(2, 1fr);\
+            gap: 15px;\
+            margin-bottom: 30px;\
+        \}\
+\
+        .result-images img \{\
+            width: 100%;\
+            height: 200px;\
+            object-fit: cover;\
+            border-radius: 20px;\
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);\
+            transition: transform 0.3s ease;\
+        \}\
+\
+        .result-images img:hover \{\
+            transform: scale(1.05);\
+        \}\
+\
+        .share-buttons \{\
+            display: flex;\
+            gap: 10px;\
+            flex-wrap: wrap;\
+            justify-content: center;\
+        \}\
+\
+        .share-btn \{\
+            flex: 1;\
+            min-width: 150px;\
+            padding: 12px 20px;\
+            background: linear-gradient(135deg, #a8e6cf 0%, #c8e6c9 100%);\
+            color: #2e7d32;\
+            border: none;\
+            border-radius: 20px;\
+            font-size: 0.95rem;\
+            font-weight: 500;\
+            cursor: pointer;\
+            transition: all 0.3s ease;\
+            font-family: 'Noto Sans TC', sans-serif;\
+        \}\
+\
+        .share-btn:hover \{\
+            transform: translateY(-2px);\
+            box-shadow: 0 8px 20px rgba(168, 230, 207, 0.4);\
+        \}\
+\
+        .restart-btn \{\
+            margin-top: 15px;\
+            background: linear-gradient(135deg, #b39ddb 0%, #ce93d8 100%);\
+        \}\
+\
+        .cat-emoji \{\
+            font-size: 3rem;\
+            margin-bottom: 20px;\
+            display: block;\
+        \}\
+\
+        @media (max-width: 600px) \{\
+            .container \{\
+                padding: 30px 20px;\
+                border-radius: 20px;\
+            \}\
+\
+            h1 \{\
+                font-size: 1.6rem;\
+            \}\
+\
+            h2 \{\
+                font-size: 1.3rem;\
+            \}\
+\
+            .result-images \{\
+                grid-template-columns: 1fr;\
+            \}\
+\
+            .result-images img \{\
+                height: 250px;\
+            \}\
+        \}\
+    </style>\
+</head>\
+<body>\
+    <div class="container">\
+        <!-- 
+\f1 \'9a\'67\'d3\'ad\'ed\'93
+\f0  -->\
+        <div id="welcome-page" class="page active">\
+            <span class="cat-emoji">
+\f2 \uc0\u55357 \u56369 
+\f0 </span>\
+            <h1>
+\f1 \'c4\'e3\'b5\'c4\'d8\'88\'df\'e4\'83\'c8\'d0\'c4\'ca\'c0\'bd\'e7
+\f0 </h1>\
+            <p class="subtitle">\
+                
+\f1 \'9a\'67\'d3\'ad\'81\'ed\'b5\'bd\'df\'40\'82\'80\'9c\'d8\'dc\'b0\'b5\'c4\'d0\'c4\'ec\'60\'c2\'c3\'b3\'cc\'a1\'a3\'d7\'8c\'ce\'d2\'82\'83\'d2\'bb\'c6\'f0\'cc\'bd\'cb\'f7\'c4\'e3\'83\'c8\'d0\'c4\'c4\'c7\'eb\'62\'aa\'9a\'cc\'d8\'b5\'c4\'d8\'88\'df\'e4\'a3\'ac\'b0\'6c\'ac\'46\'8c\'d9\'ec\'b6\'c4\'e3\'b5\'c4\'9c\'d8\'c5\'af\'b9\'ca\'ca\'c2\'a1\'a3
+\f0 \
+            </p>\
+            \
+            <div class="input-group">\
+                <input type="text" id="userName" placeholder="
+\f1 \'d5\'88\'dd\'94\'c8\'eb\'c4\'e3\'b5\'c4\'c3\'fb\'d7\'d6
+\f0 ..." />\
+            </div>\
+            \
+            <p class="subtitle" style="font-size: 0.9rem; color: #888; line-height: 1.8;">\
+                
+\f1 \'d4\'53\'b6\'e0\'c1\'f7\'c0\'cb\'d8\'88\'cf\'f1\'ce\'d2\'d2\'bb\'98\'d3\'a3\'ac\'bf\'ca\'cd\'fb\'d2\'bb\'82\'80\'9c\'d8\'c5\'af\'b5\'c4\'bc\'d2\'a1\'a3\'d6\'bb\'d2\'aa\'a1\'b8\'d2\'aa\'f0\'6a\'be\'cd\'d2\'aa\'bc\'99\'a1\'b9\'a1\'a2\'a1\'b8\'ee\'49\'f0\'42\'b2\'bb\'97\'89\'f0\'42\'a1\'b9\'a3\'ac\'ce\'d2\'82\'83\'be\'cd\'c4\'dc\'d2\'bb\'c6\'f0\'9e\'e9\'df\'f7\'d0\'c7\'c8\'cb\'b5\'c4\'d0\'d2\'b8\'a3\'c5\'ac\'c1\'a6\'a1\'a3
+\f0 <br>\
+                <strong style="color: #ff6b9d;">
+\f1 \'d3\'d0\'c4\'e3\'a3\'ab\'d3\'d0\'ce\'d2
+\f0 =
+\f1 \'d3\'d0\'ce\'d2\'82\'83
+\f0 </strong>\
+            </p>\
+            \
+            <button class="btn" onclick="startQuiz()">
+\f1 \'e9\'5f\'ca\'bc\'cc\'bd\'cb\'f7
+\f0  
+\f2 \uc0\u10024 
+\f0 </button>\
+        </div>\
+\
+        <!-- 
+\f1 \'e9\'5f\'ee\'5e\'94\'a2\'ca\'f6\'ed\'93
+\f0  -->\
+        <div id="intro-page" class="page">\
+            <span class="cat-emoji">
+\f2 \uc0\u55356 \u57113 
+\f0 </span>\
+            <h2>
+\f1 \'c1\'f7\'c0\'cb\'d8\'88\'b5\'c4\'aa\'9a\'b0\'d7
+\f0 </h2>\
+            <div class="story-text">\
+                
+\f1 \'ce\'d2\'ca\'c7\'d2\'bb\'eb\'62\'d4\'da\'bd\'d6\'ee\'5e\'c5\'c7\'bb\'b2\'b5\'c4\'c1\'f7\'c0\'cb\'d8\'88\'a3\'ac\'d2\'b9\'cd\'ed\'b5\'c4\'ef\'4c\'d3\'d0\'fc\'63\'9b\'f6\'a3\'ac\'b5\'ab\'d4\'c2\'b9\'e2\'bf\'82\'ca\'c7\'c4\'c7\'fc\'4e\'9c\'d8\'c8\'e1\'a1\'a3
+\f0 <br><br>\
+                
+\f1 \'ce\'d2\'b3\'a3\'b3\'a3\'ec\'6f\'ec\'6f\'d7\'f8\'d6\'f8\'a3\'ac\'bf\'b4\'d6\'f8\'81\'ed\'81\'ed\'cd\'f9\'cd\'f9\'b5\'c4\'c8\'cb\'82\'83\'a3\'ac\'d0\'c4\'d1\'65\'cf\'eb\'d6\'f8
+\f0 \'85\'85
+\f1 \'c8\'e7\'b9\'fb\'d3\'d0\'82\'80\'bc\'d2\'a3\'ac\'95\'fe\'ca\'c7\'ca\'b2\'fc\'4e\'b8\'d0\'d3\'58\'c4\'d8\'a3\'bf
+\f0 <br><br>\
+                
+\f1 \'ac\'46\'d4\'da\'a3\'ac\'d7\'8c\'ce\'d2\'82\'83\'d2\'bb\'c6\'f0\'df\'4d\'c8\'eb\'ce\'d2\'b5\'c4\'83\'c8\'d0\'c4\'ca\'c0\'bd\'e7\'a1\'a3\'c4\'e3\'df\'78\'93\'f1\'b5\'c4\'b4\'f0\'b0\'b8\'a3\'ac\'8c\'a2\'bd\'d2\'e9\'5f\'c4\'e3\'83\'c8\'d0\'c4\'b5\'c4\'d8\'88\'df\'e4\'c4\'a3\'98\'d3
+\f0 \'85\'85\
+            </div>\
+            <button class="btn" onclick="startQuestions()">
+\f1 \'df\'4d\'c8\'eb\'83\'c8\'d0\'c4\'ca\'c0\'bd\'e7
+\f0  
+\f2 \uc0\u55356 \u57119 
+\f0 </button>\
+        </div>\
+\
+        <!-- 
+\f1 \'86\'96\'ee\'7d\'ed\'93\'c3\'e6
+\f0  -->\
+        <div id="question-page" class="page">\
+            <div class="progress-text">
+\f1 \'86\'96\'ee\'7d
+\f0  <span id="currentQ">1</span> / 8</div>\
+            <div class="progress-bar">\
+                <div class="progress-fill" id="progressBar"></div>\
+            </div>\
+            \
+            <p class="question-text" id="questionContext"></p>\
+            <h3 class="question-title" id="questionTitle"></h3>\
+            \
+            <div class="options" id="optionsContainer"></div>\
+        </div>\
+\
+        <!-- 
+\f1 \'bd\'59\'b9\'fb\'ed\'93
+\f0  -->\
+        <div id="result-page" class="page">\
+            <span class="cat-emoji" id="resultEmoji">
+\f2 \uc0\u55357 \u56369 
+\f0 </span>\
+            <h2 class="result-title" id="resultType"></h2>\
+            <div class="result-description" id="resultDescription"></div>\
+            \
+            <div class="result-images" id="resultImages"></div>\
+            \
+            <div class="share-buttons">\
+                <button class="share-btn" onclick="shareResult()">
+\f1 \'b7\'d6\'cf\'ed\'c4\'e3\'b5\'c4\'d8\'88\'df\'e4\'83\'c8\'d0\'c4
+\f0  
+\f2 \uc0\u55356 \u57216 
+\f0 </button>\
+                <button class="share-btn restart-btn" onclick="restartQuiz()">
+\f1 \'d6\'d8\'d0\'c2\'9c\'79\'f2\'9e
+\f0  
+\f2 \uc0\u55357 \u56580 
+\f0 </button>\
+            </div>\
+        </div>\
+    </div>\
+\
+    <script>\
+        // 
+\f1 \'c8\'ab\'be\'d6\'d7\'83\'94\'b5
+\f0 \
+        let userName = '';\
+        let currentQuestion = 0;\
+        let scores = \{\
+            orange: 0,    // 
+\f1 \'e9\'d9\'d8\'88
+\f0 \
+            black: 0,     // 
+\f1 \'ba\'da\'d8\'88
+\f0 \
+            calico: 0,    // 
+\f1 \'c8\'fd\'bb\'a8\'d8\'88
+\f0 \
+            british: 0,   // 
+\f1 \'d3\'a2\'87\'f8\'b6\'cc\'c3\'ab
+\f0 \
+            siamese: 0,   // 
+\f1 \'e5\'df\'c1\'5f\'d8\'88
+\f0 \
+            persian: 0    // 
+\f1 \'b2\'a8\'cb\'b9\'d8\'88
+\f0 \
+        \};\
+\
+        // 
+\f1 \'86\'96\'ee\'7d\'94\'b5\'93\'fe
+\f0 \
+        const questions = [\
+            \{\
+                context: "
+\f1 \'d4\'da\'d3\'ea\'e1\'e1\'b5\'c4\'cf\'ef\'d7\'d3\'a3\'ac\'ce\'d2\'c2\'84\'b5\'bd\'df\'68\'cc\'8e\'ca\'b3\'ce\'ef\'b5\'c4\'cf\'e3\'9a\'e2\'a3\'ac\'d0\'c4\'d1\'65\'9c\'a5\'c6\'f0\'d2\'bb\'bd\'7a\'bf\'ca\'cd\'fb
+\f0 \'85\'85",\
+                question: "
+\f1 \'c4\'e3\'95\'fe\'d4\'f5\'fc\'4e\'d7\'f6\'a3\'bf
+\f0 ",\
+                options: [\
+                    \{ text: "A. 
+\f1 \'d3\'c2\'b8\'d2\'d7\'df\'bd\'fc\'a3\'ac\'b3\'e4\'9d\'4d\'bb\'ee\'c1\'a6\'b5\'d8\'cc\'bd\'cb\'f7
+\f0 ", type: "orange" \},\
+                    \{ text: "B. 
+\f1 \'ec\'6f\'ec\'6f\'d3\'5e\'b2\'ec\'a3\'ac\'b5\'c8\'b0\'b2\'c8\'ab\'95\'72\'d4\'d9\'bf\'bf\'bd\'fc
+\f0 ", type: "black" \},\
+                    \{ text: "C. 
+\f1 \'ba\'c3\'c6\'e6\'b5\'d8\'c0\'40\'c8\'a6\'a3\'ac\'dd\'70\'dd\'70\'d4\'87\'cc\'bd
+\f0 ", type: "calico" \},\
+                    \{ text: "D. 
+\f1 \'c6\'bd\'ec\'6f\'b5\'c8\'b4\'fd\'a3\'ac\'cf\'ed\'ca\'dc\'df\'40\'b7\'dd\'8c\'8e\'ec\'6f
+\f0 ", type: "british" \}\
+                ]\
+            \},\
+            \{\
+                context: "
+\f1 \'d3\'d0\'c8\'cb\'c9\'ec\'b3\'f6\'ca\'d6\'a3\'ac\'ce\'d2\'cf\'eb\'b1\'bb\'d3\'7c\'c5\'f6\'a3\'ac\'b5\'ab\'d3\'d6\'ba\'a6\'c5\'c2\'ca\'dc\'82\'fb
+\f0 \'85\'85",\
+                question: "
+\f1 \'c4\'e3\'b5\'c4\'d0\'c4\'95\'fe\'a3\'bf
+\f0 ",\
+                options: [\
+                    \{ text: "A. 
+\f1 \'9f\'e1\'c7\'e9\'d3\'ad\'c9\'cf\'a3\'ac\'bf\'ca\'cd\'fb\'df\'42\'bd\'d3
+\f0 ", type: "siamese" \},\
+                    \{ text: "B. 
+\f1 \'cf\'c8\'cd\'cb\'e1\'e1\'a3\'ac\'b5\'ab\'83\'c8\'d0\'c4\'c8\'e1\'dc\'9b
+\f0 ", type: "persian" \},\
+                    \{ text: "C. 
+\f1 \'aa\'71\'d4\'a5\'de\'44\'c9\'ed\'a3\'ac\'85\'73\'cd\'b5\'cd\'b5\'bb\'d8\'ee\'5e
+\f0 ", type: "calico" \},\
+                    \{ text: "D. 
+\f1 \'9c\'d8\'c8\'e1\'bd\'d3\'ca\'dc\'a3\'ac\'b8\'d0\'ca\'dc\'c5\'af\'d2\'e2
+\f0 ", type: "british" \}\
+                ]\
+            \},\
+            \{\
+                context: "
+\f1 \'d5\'d2\'b5\'bd\'d2\'bb\'82\'80\'eb\'5b\'b1\'ce\'b5\'c4\'bd\'c7\'c2\'e4\'a3\'ac\'d3\'ea\'cd\'a3\'c1\'cb\'a3\'ac\'ce\'d2\'f2\'e9\'c6\'f0\'c9\'ed\'d7\'d3
+\f0 \'85\'85",\
+                question: "
+\f1 \'83\'c8\'d0\'c4\'b5\'c4\'b8\'d0\'d3\'58\'ca\'c7\'a3\'bf
+\f0 ",\
+                options: [\
+                    \{ text: "A. 
+\f1 \'cf\'eb\'cd\'e6\'f4\'5b\'a3\'ac\'e1\'8c\'b7\'c5\'c4\'dc\'c1\'bf
+\f0 ", type: "orange" \},\
+                    \{ text: "B. 
+\f1 \'cf\'ed\'ca\'dc\'aa\'9a\'cc\'8e\'b5\'c4\'c6\'bd\'ec\'6f
+\f0 ", type: "black" \},\
+                    \{ text: "C. 
+\f1 \'cc\'bd\'cb\'f7\'d6\'dc\'87\'fa\'b5\'c4\'d2\'bb\'c7\'d0
+\f0 ", type: "siamese" \},\
+                    \{ text: "D. 
+\f1 \'83\'9e\'d1\'c5\'d0\'dd\'cf\'a2\'a3\'ac\'b5\'c8\'b4\'fd\'ea\'96\'b9\'e2
+\f0 ", type: "persian" \}\
+                ]\
+            \},\
+            \{\
+                context: "
+\f1 \'bf\'b4\'b5\'bd\'c6\'e4\'cb\'fb\'d8\'88\'d4\'da\'ea\'96\'b9\'e2\'cf\'c2\'e6\'d2\'91\'f2\'a3\'ac\'ce\'d2\'d0\'c4\'d1\'65\'c1\'77\'c4\'bd\'c4\'c7\'b7\'dd\'d7\'d4\'d4\'da
+\f0 \'85\'85",\
+                question: "
+\f1 \'c4\'e3\'95\'fe\'a3\'bf
+\f0 ",\
+                options: [\
+                    \{ text: "A. 
+\f1 \'bc\'d3\'c8\'eb\'c6\'e4\'d6\'d0\'a3\'ac\'b7\'d6\'cf\'ed\'bf\'ec\'98\'b7
+\f0 ", type: "calico" \},\
+                    \{ text: "B. 
+\f1 \'8f\'c4\'df\'68\'cc\'8e\'ca\'d8\'cd\'fb\'a3\'ac\'ce\'a2\'d0\'a6
+\f0 ", type: "british" \},\
+                    \{ text: "C. 
+\f1 \'dd\'70\'c2\'95\'ba\'f4\'86\'be\'a3\'ac\'ce\'fc\'d2\'fd\'d7\'a2\'d2\'e2
+\f0 ", type: "siamese" \},\
+                    \{ text: "D. 
+\f1 \'9c\'d8\'c8\'e1\'bf\'bf\'bd\'fc\'a3\'ac\'ec\'6f\'ec\'6f\'c5\'e3\'b0\'e9
+\f0 ", type: "persian" \}\
+                ]\
+            \},\
+            \{\
+                context: "
+\f1 \'c5\'bc\'a0\'96\'cf\'eb\'c6\'f0\'df\'5e\'c8\'a5\'b5\'c4\'9c\'d8\'c5\'af\'a3\'ac\'c4\'c7\'b7\'4e\'b1\'bb\'93\'ed\'b1\'a7\'b5\'c4\'b8\'d0\'d3\'58
+\f0 \'85\'85",\
+                question: "
+\f1 \'c3\'e6\'8c\'a6\'bb\'d8\'91\'9b\'a3\'ac\'c4\'e3\'95\'fe\'a3\'bf
+\f0 ",\
+                options: [\
+                    \{ text: "A. 
+\f1 \'d3\'c3\'bb\'ee\'c1\'a6\'cc\'ee\'9d\'4d\'ac\'46\'d4\'da
+\f0 ", type: "orange" \},\
+                    \{ text: "B. 
+\f1 \'ec\'6f\'ec\'6f\'c6\'b7\'ce\'b6\'a3\'ac\'af\'9f\'b0\'4b\'d7\'d4\'bc\'ba
+\f0 ", type: "black" \},\
+                    \{ text: "C. 
+\f1 \'b6\'e0\'d7\'83\'b5\'d8\'de\'44\'d2\'c6\'d0\'c4\'c7\'e9
+\f0 ", type: "calico" \},\
+                    \{ text: "D. 
+\f1 \'c6\'bd\'ec\'6f\'bd\'d3\'ca\'dc\'a3\'ac\'c0\'5e\'c0\'6d\'c7\'b0\'d0\'d0
+\f0 ", type: "british" \}\
+                ]\
+            \},\
+            \{\
+                context: "
+\f1 \'d2\'b9\'cd\'ed\'b5\'c4\'d0\'c7\'d0\'c7\'e9\'57\'a0\'71\'a3\'ac\'ce\'d2\'cc\'a7\'ee\'5e\'bf\'b4\'d6\'f8\'a3\'ac\'89\'f4\'cf\'eb\'d2\'bb\'82\'80\'d3\'c0\'df\'68\'b5\'c4\'bc\'d2
+\f0 \'85\'85",\
+                question: "
+\f1 \'83\'c8\'d0\'c4\'b5\'c4\'bf\'ca\'cd\'fb\'ca\'c7\'a3\'bf
+\f0 ",\
+                options: [\
+                    \{ text: "A. 
+\f1 \'9f\'6f\'b1\'4d\'b5\'c4\'cc\'bd\'cb\'f7\'c5\'63\'c5\'e3\'b0\'e9
+\f0 ", type: "siamese" \},\
+                    \{ text: "B. 
+\f1 \'c8\'e1\'dc\'9b\'b5\'c4\'b0\'b2\'ec\'6f\'95\'72\'b9\'e2
+\f0 ", type: "persian" \},\
+                    \{ text: "C. 
+\f1 \'9f\'e1\'f4\'5b\'b5\'c4\'b7\'d6\'cf\'ed\'95\'72\'bf\'cc
+\f0 ", type: "orange" \},\
+                    \{ text: "D. 
+\f1 \'c9\'ee\'b3\'c1\'b5\'c4\'aa\'9a\'cc\'8e\'af\'9f\'b0\'4b
+\f0 ", type: "black" \}\
+                ]\
+            \},\
+            \{\
+                context: "
+\f1 \'ef\'4c\'b4\'b5\'df\'5e\'98\'e4\'c8\'7e\'a3\'ac\'c9\'b3\'c9\'b3\'c2\'95\'cf\'f1\'dd\'70\'c8\'e1\'b5\'c4\'c4\'d8\'e0\'ab
+\f0 \'85\'85",\
+                question: "
+\f1 \'c4\'e3\'95\'fe\'d4\'f5\'fc\'4e\'bb\'d8\'91\'aa\'a3\'bf
+\f0 ",\
+                options: [\
+                    \{ text: "A. 
+\f1 \'c5\'64\'8a\'5e\'d7\'b7\'d6\'f0\'c8\'7e\'d7\'d3
+\f0 ", type: "calico" \},\
+                    \{ text: "B. 
+\f1 \'b0\'b2\'b7\'80\'d7\'f8\'cf\'c2\'a3\'ac\'b8\'d0\'ca\'dc\'ef\'4c
+\f0 ", type: "british" \},\
+                    \{ text: "C. 
+\f1 \'dd\'70\'c2\'95\'c5\'63\'ef\'4c\'8c\'a6\'d4\'92
+\f0 ", type: "siamese" \},\
+                    \{ text: "D. 
+\f1 \'83\'9e\'d1\'c5\'c9\'ec\'d5\'b9\'a3\'ac\'93\'ed\'b1\'a7\'df\'40\'d2\'bb\'bf\'cc
+\f0 ", type: "persian" \}\
+                ]\
+            \},\
+            \{\
+                context: "
+\f1 \'bd\'4b\'ec\'b6\'a3\'ac\'ce\'d2\'e9\'5d\'c9\'cf\'d1\'db\'be\'a6\'a3\'ac\'83\'c8\'d0\'c4\'b8\'a1\'ac\'46\'d7\'ee\'d5\'e6\'8c\'8d\'b5\'c4\'d7\'d4\'bc\'ba
+\f0 \'85\'85",\
+                question: "
+\f1 \'d7\'ee\'e1\'e1\'b5\'c4\'b8\'d0\'d3\'58\'ca\'c7\'a3\'bf
+\f0 ",\
+                options: [\
+                    \{ text: "A. 
+\f1 \'bb\'ee\'c1\'a6\'9d\'4d\'9d\'4d\'b5\'c4\'9c\'d8\'c5\'af
+\f0 ", type: "orange" \},\
+                    \{ text: "B. 
+\f1 \'c9\'f1\'c3\'d8\'85\'73\'c8\'e1\'dc\'9b\'b5\'c4\'c6\'bd\'ec\'6f
+\f0 ", type: "black" \},\
+                    \{ text: "C. 
+\f1 \'b6\'e0\'b2\'ca\'d3\'d0\'c8\'a4\'b5\'c4\'d7\'d4\'d3\'c9
+\f0 ", type: "calico" \},\
+                    \{ text: "D. 
+\f1 \'b7\'80\'d6\'d8\'83\'9e\'d1\'c5\'b5\'c4\'b0\'b2\'d0\'c4
+\f0 ", type: "british" \}\
+                ]\
+            \}\
+        ];\
+\
+        // 
+\f1 \'bd\'59\'b9\'fb\'94\'b5\'93\'fe
+\f0 \
+        const results = \{\
+            orange: \{\
+                name: "
+\f1 \'e9\'d9\'d8\'88\'d0\'cd
+\f0 ",\
+                emoji: "
+\f2 \uc0\u55358 \u56801 
+\f0 ",\
+                description: "
+\f1 \'c4\'e3\'b5\'c4\'83\'c8\'d0\'c4\'ca\'c0\'bd\'e7\'cf\'f1\'d2\'bb\'eb\'62\'b3\'e4\'9d\'4d\'9c\'d8\'c5\'af\'b5\'c4\'e9\'d9\'d8\'88\'a3\'ac\'cf\'f1\'ea\'96\'b9\'e2\'b0\'e3\'af\'9f\'b0\'4b\'d6\'dc\'87\'fa\'b5\'c4\'d2\'bb\'c7\'d0\'a1\'a3\'c4\'e3\'8e\'a7\'81\'ed\'bf\'ec\'98\'b7\'c5\'63\'cf\'a3\'cd\'fb\'a3\'ac\'d7\'8c\'c8\'cb\'b8\'d0\'d3\'58\'ca\'c0\'bd\'e7\'b8\'fc\'c3\'f7\'c1\'c1\'a1\'a3
+\f0 ",\
+                images: [\
+                    "https://images.unsplash.com/photo-1574158622682-e40e69881006?w=400&h=300&fit=crop",\
+                    "https://images.unsplash.com/photo-1533738363-b7f9aef128ce?w=400&h=300&fit=crop",\
+                    "https://images.unsplash.com/photo-1529778873920-4da4926a72c2?w=400&h=300&fit=crop"\
+                ]\
+            \},\
+            black: \{\
+                name: "
+\f1 \'ba\'da\'d8\'88\'d0\'cd
+\f0 ",\
+                emoji: "
+\f2 \uc0\u55357 \u56740 
+\f0 ",\
+                description: "
+\f1 \'c4\'e3\'b5\'c4\'83\'c8\'d0\'c4\'ca\'c0\'bd\'e7\'cf\'f1\'d2\'bb\'eb\'62\'c9\'f1\'c3\'d8\'85\'73\'9c\'d8\'c8\'e1\'b5\'c4\'ba\'da\'d8\'88\'a3\'ac\'cf\'f1\'d4\'c2\'b9\'e2\'b0\'e3\'ec\'6f\'ec\'6f\'ca\'d8\'d7\'6f\'a1\'a3\'c4\'e3\'b5\'c4\'83\'c8\'d0\'c4\'b3\'e4\'9d\'4d\'c9\'ee\'b6\'c8\'c5\'63\'af\'9f\'b0\'4b\'a3\'ac\'bd\'6f\'c8\'cb\'b0\'b2\'d0\'c4\'b5\'c4\'93\'ed\'b1\'a7\'a1\'a3
+\f0 ",\
+                images: [\
+                    "https://images.unsplash.com/photo-1529257414772-1960b7bea4eb?w=400&h=300&fit=crop",\
+                    "https://images.unsplash.com/photo-1516750930-93b2a4da6d14?w=400&h=300&fit=crop",\
+                    "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=400&h=300&fit=crop"\
+                ]\
+            \},\
+            calico: \{\
+                name: "
+\f1 \'c8\'fd\'bb\'a8\'d8\'88\'d0\'cd
+\f0 ",\
+                emoji: "
+\f2 \uc0\u55356 \u57144 
+\f0 ",\
+                description: "
+\f1 \'c4\'e3\'b5\'c4\'83\'c8\'d0\'c4\'ca\'c0\'bd\'e7\'cf\'f1\'d2\'bb\'eb\'62\'b6\'e0\'b2\'ca\'b6\'f8\'d7\'d4\'d3\'c9\'b5\'c4\'c8\'fd\'bb\'a8\'d8\'88\'a3\'ac\'cf\'f1\'bb\'a8\'b6\'e4\'b0\'e3\'be\'60\'b7\'c5\'9c\'d8\'dc\'b0\'a1\'a3\'c4\'e3\'8e\'a7\'81\'ed\'f3\'40\'cf\'b2\'c5\'63\'af\'9f\'b0\'4b\'a3\'ac\'d7\'8c\'c9\'fa\'bb\'ee\'b3\'e4\'9d\'4d\'c8\'e1\'dc\'9b\'b5\'c4\'c3\'c0\'a1\'a3
+\f0 ",\
+                images: [\
+                    "https://images.unsplash.com/photo-1495360010541-f48722b34f7d?w=400&h=300&fit=crop",\
+                    "https://images.unsplash.com/photo-1513360371669-4adf3dd7dff8?w=400&h=300&fit=crop",\
+                    "https://images.unsplash.com/photo-1478098711619-5ab0b478d6e6?w=400&h=300&fit=crop"\
+                ]\
+            \},\
+            british: \{\
+                name: "
+\f1 \'d3\'a2\'87\'f8\'b6\'cc\'c3\'ab\'d0\'cd
+\f0 ",\
+                emoji: "
+\f2 \uc0\u55357 \u56473 
+\f0 ",\
+                description: "
+\f1 \'c4\'e3\'b5\'c4\'83\'c8\'d0\'c4\'ca\'c0\'bd\'e7\'cf\'f1\'d2\'bb\'eb\'62\'b7\'80\'d6\'d8\'9c\'d8\'c8\'e1\'b5\'c4\'d3\'a2\'87\'f8\'b6\'cc\'c3\'ab\'a3\'ac\'cf\'f1\'93\'ed\'b1\'a7\'b0\'e3\'bf\'c9\'bf\'bf\'a1\'a3\'c4\'e3\'b5\'c4\'83\'c8\'d0\'c4\'ca\'c7\'8c\'8e\'ec\'6f\'b5\'c4\'b8\'db\'9e\'b3\'a3\'ac\'af\'9f\'b0\'4b\'c3\'bf\'d2\'bb\'82\'80\'bf\'bf\'bd\'fc\'b5\'c4\'c8\'cb\'a1\'a3
+\f0 ",\
+                images: [\
+                    "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=300&fit=crop",\
+                    "https://images.unsplash.com/photo-1596854407944-bf87f6fdd49e?w=400&h=300&fit=crop",\
+                    "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&h=300&fit=crop"\
+                ]\
+            \},\
+            siamese: \{\
+                name: "
+\f1 \'e5\'df\'c1\'5f\'d8\'88\'d0\'cd
+\f0 ",\
+                emoji: "
+\f2 \uc0\u55357 \u56476 
+\f0 ",\
+                description: "
+\f1 \'c4\'e3\'b5\'c4\'83\'c8\'d0\'c4\'ca\'c0\'bd\'e7\'cf\'f1\'d2\'bb\'eb\'62\'83\'9e\'d1\'c5\'b6\'f8\'d3\'48\'bd\'fc\'b5\'c4\'e5\'df\'c1\'5f\'d8\'88\'a3\'ac\'cf\'f1\'dd\'70\'d5\'5a\'b0\'e3\'9c\'d8\'c5\'af\'a1\'a3\'c4\'e3\'bf\'ca\'cd\'fb\'df\'42\'bd\'d3\'a3\'ac\'8e\'a7\'81\'ed\'c9\'ee\'bf\'cc\'b5\'c4\'af\'9f\'b0\'4b\'c5\'63\'c5\'e3\'b0\'e9\'a1\'a3
+\f0 ",\
+                images: [\
+                    "https://images.unsplash.com/photo-1513245543132-31f507417b26?w=400&h=300&fit=crop",\
+                    "https://images.unsplash.com/photo-1573865526739-10c1d3a1f0e3?w=400&h=300&fit=crop",\
+                    "https://images.unsplash.com/photo-1506755855567-92ff770e8d00?w=400&h=300&fit=crop"\
+                ]\
+            \},\
+            persian: \{\
+                name: "
+\f1 \'b2\'a8\'cb\'b9\'d8\'88\'d0\'cd
+\f0 ",\
+                emoji: "
+\f2 \uc0\u55358 \u56589 
+\f0 ",\
+                description: "
+\f1 \'c4\'e3\'b5\'c4\'83\'c8\'d0\'c4\'ca\'c0\'bd\'e7\'cf\'f1\'d2\'bb\'eb\'62\'c8\'e1\'dc\'9b\'c9\'dd\'c8\'41\'b5\'c4\'b2\'a8\'cb\'b9\'d8\'88\'a3\'ac\'cf\'f1\'eb\'85\'b6\'e4\'b0\'e3\'ca\'e6\'df\'6d\'a1\'a3\'c4\'e3\'b5\'c4\'83\'c8\'d0\'c4\'b3\'e4\'9d\'4d\'9c\'d8\'c8\'e1\'a3\'ac\'af\'9f\'b0\'4b\'d7\'d4\'bc\'ba\'d2\'b2\'af\'9f\'b0\'4b\'cb\'fb\'c8\'cb\'a1\'a3
+\f0 ",\
+                images: [\
+                    "https://images.unsplash.com/photo-1455970022149-a8f26b6902dd?w=400&h=300&fit=crop",\
+                    "https://images.unsplash.com/photo-1511044568932-338cba0ad803?w=400&h=300&fit=crop",\
+                    "https://images.unsplash.com/photo-1543852786-1cf6624b9987?w=400&h=300&fit=crop"\
+                ]\
+            \}\
+        \};\
+\
+        // 
+\f1 \'c7\'d0\'93\'51\'ed\'93\'c3\'e6
+\f0 \
+        function showPage(pageId) \{\
+            document.querySelectorAll('.page').forEach(page => \{\
+                page.classList.remove('active');\
+            \});\
+            document.getElementById(pageId).classList.add('active');\
+        \}\
+\
+        // 
+\f1 \'e9\'5f\'ca\'bc\'9c\'79\'f2\'9e
+\f0 \
+        function startQuiz() \{\
+            const nameInput = document.getElementById('userName').value.trim();\
+            if (!nameInput) \{\
+                alert('
+\f1 \'d5\'88\'dd\'94\'c8\'eb\'c4\'e3\'b5\'c4\'c3\'fb\'d7\'d6\'d4\'d9\'e9\'5f\'ca\'bc
+\f0  
+\f2 \uc0\u55357 \u56369 
+\f0 ');\
+                return;\
+            \}\
+            userName = nameInput;\
+            showPage('intro-page');\
+        \}\
+\
+        // 
+\f1 \'e9\'5f\'ca\'bc\'86\'96\'ee\'7d
+\f0 \
+        function startQuestions() \{\
+            currentQuestion = 0;\
+            scores = \{ orange: 0, black: 0, calico: 0, british: 0, siamese: 0, persian: 0 \};\
+            showQuestion();\
+            showPage('question-page');\
+        \}\
+\
+        // 
+\f1 \'ef\'40\'ca\'be\'86\'96\'ee\'7d
+\f0 \
+        function showQuestion() \{\
+            const q = questions[currentQuestion];\
+            document.getElementById('currentQ').textContent = currentQuestion + 1;\
+            document.getElementById('progressBar').style.width = ((currentQuestion + 1) / 8 * 100) + '%';\
+            document.getElementById('questionContext').textContent = q.context;\
+            document.getElementById('questionTitle').textContent = q.question;\
+            \
+            const optionsContainer = document.getElementById('optionsContainer');\
+            optionsContainer.innerHTML = '';\
+            \
+            q.options.forEach((option, index) => \{\
+                const div = document.createElement('div');\
+                div.className = 'option';\
+                div.textContent = option.text;\
+                div.onclick = () => selectOption(option.type);\
+                optionsContainer.appendChild(div);\
+            \});\
+        \}\
+\
+        // 
+\f1 \'df\'78\'93\'f1\'df\'78\'ed\'97
+\f0 \
+        function selectOption(type) \{\
+            scores[type]++;\
+            \
+            if (currentQuestion < questions.length - 1) \{\
+                currentQuestion++;\
+                setTimeout(() => \{\
+                    showQuestion();\
+                \}, 300);\
+            \} else \{\
+                setTimeout(() => \{\
+                    showResult();\
+                \}, 300);\
+            \}\
+        \}\
+\
+        // 
+\f1 \'ef\'40\'ca\'be\'bd\'59\'b9\'fb
+\f0 \
+        function showResult() \{\
+            // 
+\f1 \'d5\'d2\'b3\'f6\'d7\'ee\'b8\'df\'b7\'d6
+\f0 \
+            let maxScore = 0;\
+            let resultType = 'orange';\
+            \
+            for (let type in scores) \{\
+                if (scores[type] > maxScore) \{\
+                    maxScore = scores[type];\
+                    resultType = type;\
+                \} else if (scores[type] === maxScore && Math.random() > 0.5) \{\
+                    resultType = type;\
+                \}\
+            \}\
+            \
+            const result = results[resultType];\
+            \
+            document.getElementById('resultEmoji').textContent = result.emoji;\
+            document.getElementById('resultType').textContent = `$\{userName\}
+\f3 \'a1\'41\'a7\'41\'ac\'4f
+\f0 $\{result.name\}`;\
+            document.getElementById('resultDescription').textContent = result.description;\
+            \
+            // 
+\f1 \'cc\'ed\'bc\'d3\'88\'44\'c6\'ac
+\f0 \
+            const imagesContainer = document.getElementById('resultImages');\
+            imagesContainer.innerHTML = '';\
+            result.images.forEach(src => \{\
+                const img = document.createElement('img');\
+                img.src = src;\
+                img.alt = result.name;\
+                imagesContainer.appendChild(img);\
+            \});\
+            \
+            showPage('result-page');\
+        \}\
+\
+        // 
+\f1 \'b7\'d6\'cf\'ed\'bd\'59\'b9\'fb
+\f0 \
+        function shareResult() \{\
+            const resultText = `
+\f1 \'ce\'d2\'cd\'ea\'b3\'c9\'c1\'cb\'a1\'b8\'d8\'88\'df\'e4\'83\'c8\'d0\'c4\'ca\'c0\'bd\'e7\'a1\'b9\'9c\'79\'f2\'9e\'a3\'a1\'bf\'ec\'81\'ed\'cc\'bd\'cb\'f7\'c4\'e3\'b5\'c4\'d8\'88\'df\'e4\'82\'80\'d0\'d4\'b0\'c9
+\f0  
+\f2 \uc0\u55357 \u56369 \u10024 
+\f0 `;\
+            \
+            if (navigator.share) \{\
+                navigator.share(\{\
+\
+}
